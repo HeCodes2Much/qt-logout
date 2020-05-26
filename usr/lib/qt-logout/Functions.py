@@ -11,13 +11,13 @@ import configparser
 home = os.path.expanduser("~")
 base_dir = os.path.dirname(os.path.realpath(__file__))
 # here = Path(__file__).resolve()
-working_dir = ''.join([str(Path(__file__).parents[2]), "/share/cynicalteam-logout/"])
+working_dir = ''.join([str(Path(__file__).parents[2]), "/share/qt-logout/"])
 # config = "etc/setting.conf"
-if os.path.isfile(home + "/.config/cynicalteam-logout/settings.conf"):
-    config = home + "/.config/cynicalteam-logout/settings.conf"
+if os.path.isfile(home + "/.config/qt-logout/settings.conf"):
+    config = home + "/.config/qt-logout/settings.conf"
 else:
-    config = ''.join([str(Path(__file__).parents[3]), "/etc/cynicalteam-logout.conf"])
-root_config = ''.join([str(Path(__file__).parents[3]), "/etc/cynicalteam-logout.conf"])
+    config = ''.join([str(Path(__file__).parents[3]), "/etc/qt-logout.conf"])
+root_config = ''.join([str(Path(__file__).parents[3]), "/etc/qt-logout.conf"])
 
 def _get_position(lists, value):
     data = [string for string in lists if value in string]
@@ -55,6 +55,6 @@ def get_config(self, config):
 
     except Exception as e:
         print(e)
-        os.unlink(home + "/.config/cynicalteam-logout/settings.conf")
-        if not os.path.isfile(home + "/.config/cynicalteam-logout/settings.conf"):
-            shutil.copy(root_config, home + "/.config/cynicalteam-logout/settings.conf")
+        os.unlink(home + "/.config/qt-logout/settings.conf")
+        if not os.path.isfile(home + "/.config/qt-logout/settings.conf"):
+            shutil.copy(root_config, home + "/.config/qt-logout/settings.conf")

@@ -21,11 +21,11 @@ class ShutdownMenu(QDialog):
 
     def __init__(self):
         super().__init__()
-        if not fn.os.path.isdir(fn.home + "/.config/cynicalteam-logout"):
-            fn.os.mkdir(fn.home + "/.config/cynicalteam-logout")
+        if not fn.os.path.isdir(fn.home + "/.config/qt-logout"):
+            fn.os.mkdir(fn.home + "/.config/qt-logout")
 
-        if not fn.os.path.isfile(fn.home + "/.config/cynicalteam-logout/settings.conf"):
-            shutil.copy(fn.root_config, fn.home + "/.config/cynicalteam-logout/settings.conf")
+        if not fn.os.path.isfile(fn.home + "/.config/qt-logout/settings.conf"):
+            shutil.copy(fn.root_config, fn.home + "/.config/qt-logout/settings.conf")
 
         fn.get_config(self, fn.config)
         self.icon_size = int(self.icon_size)
