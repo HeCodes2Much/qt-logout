@@ -3,7 +3,6 @@
 import sys
 import getpass
 import os
-import subprocess
 import shutil
 import Functions as fn
 from PyQt5.QtGui import *
@@ -56,7 +55,6 @@ class ShutdownMenu(QDialog):
         self.logout_button.setText("Logout")
         self.logout_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.logout_button.setShortcut("ctrl+e")
-        self.logout_button.move(0,0)
         self.logout_button.clicked.connect(self.logout)
 
         self.suspend_button = QToolButton()
@@ -67,7 +65,6 @@ class ShutdownMenu(QDialog):
         self.suspend_button.setText("Suspend")
         self.suspend_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.suspend_button.setShortcut("ctrl+s")
-        self.suspend_button.move(0,0)
         self.suspend_button.clicked.connect(self.suspend)
 
         self.restart_button = QToolButton()
@@ -78,7 +75,6 @@ class ShutdownMenu(QDialog):
         self.restart_button.setText("Restart")
         self.restart_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.restart_button.setShortcut("ctrl+r")
-        self.restart_button.move(0,0)
         self.restart_button.clicked.connect(self.restart)
 
         self.shutdown_button = QToolButton()
@@ -89,7 +85,6 @@ class ShutdownMenu(QDialog):
         self.shutdown_button.setText("Shutdown")
         self.shutdown_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.shutdown_button.setShortcut("ctrl+p")
-        self.shutdown_button.move(0,0)
         self.shutdown_button.clicked.connect(self.shutdown)
 
         self.hibernate_button = QToolButton()
@@ -100,7 +95,6 @@ class ShutdownMenu(QDialog):
         self.hibernate_button.setText("Hibernate")
         self.hibernate_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.hibernate_button.setShortcut("ctrl+p")
-        self.hibernate_button.move(0,0)
         self.hibernate_button.clicked.connect(self.hibernate)
 
         self.lock_button = QToolButton()
@@ -111,7 +105,6 @@ class ShutdownMenu(QDialog):
         self.lock_button.setText("Lock-Screen")
         self.lock_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
         self.lock_button.setShortcut("ctrl+p")
-        self.lock_button.move(0,0)
         self.lock_button.clicked.connect(self.lock)
 
         vbox.addWidget(self.text)
@@ -184,9 +177,7 @@ class ShutdownMenu(QDialog):
 
 
 def logout_systemctl():
-    out = subprocess.run(["sh", "-c", "env | grep DESKTOP_SESSION"],
-                         shell=False, stdout=subprocess.PIPE)
-    desktop = out.stdout.decode().split("=")[1].strip()
+    desktop = os.environ["DESKTOP_SESSION"]
 
     if desktop in ("herbstluftwm", "/usr/share/xsessions/herbstluftwm"):
         return "herbstclient quit"
