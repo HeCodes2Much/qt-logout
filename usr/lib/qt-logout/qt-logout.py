@@ -38,14 +38,12 @@ class ShutdownMenu(QDialog):
 
     def init_ui(self):
         vbox = QVBoxLayout()
-        self.setLayout(vbox)
         self.setWindowTitle("Shutdown menu")
 
         self.text = QLabel("Hello, " + getpass.getuser() + "! What would you like to do?")
         self.text.setStyleSheet("QLabel {background-color:transparent;font-size: "+self.title_font_size+"pt;font-weight: "+self.title_font_weight+";border: none;}")
 
         hbox = QGridLayout()
-        hbox.setSpacing(0)
 
         self.logout_button = QToolButton()
         self.logout_button.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
@@ -121,6 +119,9 @@ class ShutdownMenu(QDialog):
         if 'lock' in self.buttons:
             hbox.addWidget(self.lock_button,1,5, Qt.AlignTop)
         vbox.addLayout(hbox)
+
+        vbox.setAlignment(Qt.AlignCenter)
+        vbox.setSpacing(75)
 
         base = QWidget()
         base.setObjectName("base")
