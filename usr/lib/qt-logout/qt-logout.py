@@ -257,15 +257,18 @@ if __name__ == '__main__':
         Gui.showFullScreen()
         sys.exit(app.exec_())
     else:
+        out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
+        system = out.stdout.decode().split("=")[0].strip()
+
         if sys.argv[1] == "logout":
             logout_systemctl()
         elif sys.argv[1] == "suspend":
-            suspend_systemctl()
+            suspend_systemctl(system)
         elif sys.argv[1] == "reboot":
-            reboot_systemctl()
+            reboot_systemctl(system)
         elif sys.argv[1] == "shutdown":
-            shutdown_systemctl()
+            shutdown_systemctl(system)
         elif sys.argv[1] == "hibernate":
-            hibernate_systemctl()
+            hibernate_systemctl(system)
         elif sys.argv[1] == "lock":
             lock_systemctl('betterlockscreen -l dimblur -- --timestr="%H:%M"')
