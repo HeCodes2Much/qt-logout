@@ -4,6 +4,7 @@ import sys
 import getpass
 import os
 import shutil
+import subprocess
 import Functions as fn
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -137,35 +138,44 @@ class ShutdownMenu(QDialog):
 
     def logout(self):
         self.disable_buttons()
-        logout_systemctl()
+        logout_systemctl(system)
         self.close()
 
     def suspend(self):
+        out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
+        system = out.stdout.decode().split("=")[0].strip()
+
         self.disable_buttons()
-        suspend_systemctl()
+        suspend_systemctl(system)
         self.close()
 
     def restart(self):
+        out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
+        system = out.stdout.decode().split("=")[0].strip()
+
         self.disable_buttons()
-        reboot_systemctl()
+        reboot_systemctl(system)
         self.close()
 
     def shutdown(self):
+        out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
+        system = out.stdout.decode().split("=")[0].strip()
+
         self.disable_buttons()
-        shutdown_systemctl()
+        shutdown_systemctl(system)
         self.close()
 
     def hibernate(self):
+        out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
+        system = out.stdout.decode().split("=")[0].strip()
+
         self.disable_buttons()
-        hibernate_systemctl()
+        hibernate_systemctl(system)
         self.close()
 
     def lock(self):
         self.disable_buttons()
         lock_systemctl(self.cmd_lock)
-        self.close()
-    def cancel(self):
-        self.disable_buttons()
         self.close()
 
     def disable_buttons(self):
@@ -209,18 +219,33 @@ def logout_systemctl():
 
     return None
 
+def suspend_systemctl(system):
+    if system == 'systemd':
+        os.system("systemctl suspend")
 
-def suspend_systemctl():
-    os.system("systemctl suspend")
+    if system == 'runit':
+        os.system("loginctl suspend")
 
-def reboot_systemctl():
-    os.system("systemctl reboot")
+def reboot_systemctl(system):
+    if system == 'systemd':
+        os.system("systemctl reboot")
 
-def shutdown_systemctl():
-    os.system("systemctl poweroff")
+    if system == 'runit':
+        os.system("loginctl reboot")
 
-def hibernate_systemctl():
-    os.system("systemctl hibernate")
+def shutdown_systemctl(system):
+    if system == 'systemd':
+        os.system("systemctl poweroff")
+
+    if system == 'runit':
+        os.system("loginctl poweroff")
+
+def hibernate_systemctl(system):
+    if system == 'systemd':
+        os.system("systemctl hibernate")
+
+    if system == 'runit':
+        os.system("loginctl hibernate")
 
 def lock_systemctl(command):
     os.system(command)
