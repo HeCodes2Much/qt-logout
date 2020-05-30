@@ -138,7 +138,7 @@ class ShutdownMenu(QDialog):
 
     def logout(self):
         self.disable_buttons()
-        logout_systemctl()
+        print(logout_systemctl())
         self.close()
 
     def suspend(self):
@@ -190,32 +190,35 @@ class ShutdownMenu(QDialog):
 def logout_systemctl():
     desktop = os.environ["DESKTOP_SESSION"]
 
+    print("Your desktop is " + desktop)
     if desktop in ("herbstluftwm", "/usr/share/xsessions/herbstluftwm"):
-        return "herbstclient quit"
+        os.system( "herbstclient quit")
     elif desktop in ("bspwm", "/usr/share/xsessions/bspwm"):
-        return "pkill bspwm"
+        os.system("pkill bspwm")
     elif desktop in ("jwm", "/usr/share/xsessions/jwm"):
-        return "pkill jwm"
+        os.system("pkill jwm")
     elif desktop in ("openbox", "/usr/share/xsessions/openbox"):
-        return "pkill openbox"
+        os.system("pkill openbox")
     elif desktop in ("awesome", "/usr/share/xsessions/awesome"):
-        return "pkill awesome"
+        os.system("pkill awesome")
     elif desktop in ("qtile", "/usr/share/xsessions/qtile"):
-        return "pkill qtile"
+        os.system("pkill qtile")
     elif desktop in ("xmonad", "/usr/share/xsessions/xmonad"):
-        return "pkill xmonad"
+        os.system("pkill xmonad")
     elif desktop in ("dwm", "/usr/share/xsessions/dwm"):
-        return "pkill dwm"
+        os.system("pkill dwm")
     elif desktop in ("i3", "/usr/share/xsessions/i3"):
-        return "pkill i3"
+        os.system("pkill i3")
+    elif desktop in ("i3-with-shmlog", "/usr/share/xsessions/i3-with-shmlog"):
+        os.system("pkill i3-with-shmlog")
     elif desktop in ("lxqt", "/usr/share/xsessions/lxqt"):
-        return "pkill lxqt"
+        os.system("pkill lxqt")
     elif desktop in ("spectrwm", "/usr/share/xsessions/spectrwm"):
-        return "pkill spectrwm"
+        os.system("pkill spectrwm")
     elif desktop in ("xfce", "/usr/share/xsessions/xfce"):
-        return "pkill xfce"
-    elif desktop in ("sway", "/usr/share/xsessions/sway"):
-        return "pkill sway"
+        os.system("pkill xfce")
+    elif desktop in ("sway", "/usr/bin/sway"):
+        os.system("pkill sway")
 
     return None
 
