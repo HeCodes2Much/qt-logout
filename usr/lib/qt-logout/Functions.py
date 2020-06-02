@@ -10,9 +10,6 @@ import configparser
 
 home = os.path.expanduser("~")
 base_dir = os.path.dirname(os.path.realpath(__file__))
-# here = Path(__file__).resolve()
-working_dir = ''.join([str(Path(__file__).parents[2]), "/share/qt-logout/"])
-# config = "etc/setting.conf"
 if os.path.isfile(home + "/.config/qt-logout/settings.conf"):
     config = home + "/.config/qt-logout/settings.conf"
 else:

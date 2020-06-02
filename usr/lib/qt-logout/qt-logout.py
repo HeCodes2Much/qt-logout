@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+# =====================================================
+#                  Author TheCynicalTeam
+# =====================================================
+
 import sys
 import getpass
 import os
