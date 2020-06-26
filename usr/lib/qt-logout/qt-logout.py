@@ -227,13 +227,20 @@ def logout_systemctl():
     return None
 
 def suspend_systemctl(system):
+    if system == 'init':
+        os.system("loginctl suspend")
+
     if system == 'systemd':
         os.system("systemctl suspend")
 
     if system == 'runit':
         os.system("loginctl suspend")
 
+
 def reboot_systemctl(system):
+    if system == 'init':
+        os.system("loginctl reboot")
+
     if system == 'systemd':
         os.system("systemctl reboot")
 
@@ -241,6 +248,9 @@ def reboot_systemctl(system):
         os.system("loginctl reboot")
 
 def shutdown_systemctl(system):
+    if system == 'init':
+        os.system("loginctl poweroff")
+
     if system == 'systemd':
         os.system("systemctl poweroff")
 
@@ -248,6 +258,9 @@ def shutdown_systemctl(system):
         os.system("loginctl poweroff")
 
 def hibernate_systemctl(system):
+    if system == 'init':
+        os.system("loginctl hibernate")
+
     if system == 'systemd':
         os.system("systemctl hibernate")
 
