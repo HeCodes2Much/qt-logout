@@ -291,4 +291,4 @@ if __name__ == '__main__':
         elif sys.argv[1] == "hibernate":
             hibernate_systemctl(system)
         elif sys.argv[1] == "lock":
-            lock_systemctl('betterlockscreen -l dimblur -- --timestr="%H:%M"')
+            lock_systemctl('multimonitorlock -l -- --timestr="%H:%M"')
