@@ -211,6 +211,8 @@ def logout_systemctl():
         os.system("pkill xmonad")
     elif desktop in ("dwm", "/usr/share/xsessions/dwm"):
         os.system("pkill dwm")
+    elif desktop in ("instantwm", "/usr/share/xsessions/instantwm"):
+        os.system("pkill instantwm")
     elif desktop in ("i3", "/usr/share/xsessions/i3"):
         os.system("pkill i3")
     elif desktop in ("i3-with-shmlog", "/usr/share/xsessions/i3-with-shmlog"):
