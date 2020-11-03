@@ -15,7 +15,8 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 class ShutdownMenu(QDialog):
-    # - LOGOUT - SUSPEND - RESTART - SHUTDOWN- HIBERNATE- LOCK
+    # CANCEL - LOGOUT - SUSPEND - RESTART - SHUTDOWN- HIBERNATE- LOCK
+    cancel_button = None
     logout_button = None
     suspend_button = None
     restart_button = None
@@ -49,6 +50,16 @@ class ShutdownMenu(QDialog):
         self.text.setStyleSheet("QLabel {background-color:transparent;font-size: "+self.title_font_size+"pt;font-weight: "+self.title_font_weight+";border: none;}")
 
         hbox = QGridLayout()
+
+        self.cancel_button = QToolButton()
+        self.cancel_button.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        self.cancel_button.setIcon(QIcon.fromTheme("go-home"))
+        self.cancel_button.setIconSize(QSize(self.icon_size, self.icon_size))
+        self.cancel_button.setToolTip("application-exit")
+        self.cancel_button.setText("Exit Application")
+        self.cancel_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.cancel_button.setShortcut("ctrl+q")
+        self.cancel_button.clicked.connect(self.cancel)
 
         self.logout_button = QToolButton()
         self.logout_button.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
@@ -111,18 +122,20 @@ class ShutdownMenu(QDialog):
         self.lock_button.clicked.connect(self.lock)
 
         vbox.addWidget(self.text)
+        if 'cancel' in self.buttons:
+            hbox.addWidget(self.cancel_button,1,0, Qt.AlignTop)
         if 'logout' in self.buttons:
-            hbox.addWidget(self.logout_button,1,0, Qt.AlignTop)
+            hbox.addWidget(self.logout_button,1,1, Qt.AlignTop)
         if 'suspend' in self.buttons:
-            hbox.addWidget(self.suspend_button,1,1, Qt.AlignTop)
+            hbox.addWidget(self.suspend_button,1,2, Qt.AlignTop)
         if 'restart' in self.buttons:
-            hbox.addWidget(self.restart_button,1,2, Qt.AlignTop)
+            hbox.addWidget(self.restart_button,1,3, Qt.AlignTop)
         if 'shutdown' in self.buttons:
-            hbox.addWidget(self.shutdown_button,1,3, Qt.AlignTop)
+            hbox.addWidget(self.shutdown_button,1,4, Qt.AlignTop)
         if 'hibernate' in self.buttons:
-            hbox.addWidget(self.hibernate_button,1,4, Qt.AlignTop)
+            hbox.addWidget(self.hibernate_button,1,5, Qt.AlignTop)
         if 'lock' in self.buttons:
-            hbox.addWidget(self.lock_button,1,5, Qt.AlignTop)
+            hbox.addWidget(self.lock_button,1,6, Qt.AlignTop)
         vbox.addLayout(hbox)
 
         vbox.setAlignment(Qt.AlignCenter)
@@ -140,9 +153,13 @@ class ShutdownMenu(QDialog):
         self.setAttribute(Qt.WA_TranslucentBackground, True)
         self.setStyleSheet("QWidget {background-color: rgba(0,0,0,"+self.opacity+");}")
 
+    def cancel(self):
+        self.disable_buttons()
+        self.close()
+    
     def logout(self):
         self.disable_buttons()
-        print(logout_systemctl())
+        logout_systemctl()
         self.close()
 
     def suspend(self):
@@ -183,6 +200,7 @@ class ShutdownMenu(QDialog):
         self.close()
 
     def disable_buttons(self):
+        self.cancel_button.setEnabled(False)
         self.logout_button.setEnabled(False)
         self.suspend_button.setEnabled(False)
         self.restart_button.setEnabled(False)
