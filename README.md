@@ -1,3 +1,3 @@
-##QT logout
+## QT logout
 
 ![Screen](screen.png)
