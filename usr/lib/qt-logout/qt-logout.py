@@ -10,9 +10,9 @@ import os
 import shutil
 import subprocess
 import Functions as fn
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
+from PySide6.QtGui import *
+from PySide6.QtCore import *
+from PySide6.QtWidgets import *
 
 class ShutdownMenu(QDialog):
     # CANCEL - LOGOUT - SUSPEND - RESTART - SHUTDOWN- HIBERNATE- LOCK
@@ -47,7 +47,7 @@ class ShutdownMenu(QDialog):
         self.setWindowTitle("Shutdown menu")
 
         self.text = QLabel("Hello, " + getpass.getuser() + "! What would you like to do?")
-        self.text.setStyleSheet("QLabel {background-color:transparent;font-size: "+self.title_font_size+"pt;font-weight: "+self.title_font_weight+";border: none;}")
+        self.text.setStyleSheet("QLabel {background-color:transparent;font-size: "+self.title_font_size+"pt;font-weight: "+self.title_font_weight+";border: none;color : white;}")
 
         hbox = QGridLayout()
 
@@ -57,7 +57,7 @@ class ShutdownMenu(QDialog):
         self.cancel_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.cancel_button.setToolTip("application-exit")
         self.cancel_button.setText("Exit Application")
-        self.cancel_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.cancel_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.cancel_button.setShortcut("ctrl+q")
         self.cancel_button.clicked.connect(self.cancel)
 
@@ -67,7 +67,7 @@ class ShutdownMenu(QDialog):
         self.logout_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.logout_button.setToolTip("system-log-out")
         self.logout_button.setText("Logout")
-        self.logout_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.logout_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.logout_button.setShortcut("ctrl+e")
         self.logout_button.clicked.connect(self.logout)
 
@@ -77,7 +77,7 @@ class ShutdownMenu(QDialog):
         self.suspend_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.suspend_button.setToolTip("system-suspend")
         self.suspend_button.setText("Suspend")
-        self.suspend_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.suspend_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.suspend_button.setShortcut("ctrl+s")
         self.suspend_button.clicked.connect(self.suspend)
 
@@ -87,7 +87,7 @@ class ShutdownMenu(QDialog):
         self.restart_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.restart_button.setToolTip("system-reboot")
         self.restart_button.setText("Restart")
-        self.restart_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.restart_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.restart_button.setShortcut("ctrl+r")
         self.restart_button.clicked.connect(self.restart)
 
@@ -97,7 +97,7 @@ class ShutdownMenu(QDialog):
         self.shutdown_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.shutdown_button.setToolTip("system-shutdown")
         self.shutdown_button.setText("Shutdown")
-        self.shutdown_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.shutdown_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.shutdown_button.setShortcut("ctrl+p")
         self.shutdown_button.clicked.connect(self.shutdown)
 
@@ -107,7 +107,7 @@ class ShutdownMenu(QDialog):
         self.hibernate_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.hibernate_button.setToolTip("system-hibernate")
         self.hibernate_button.setText("Hibernate")
-        self.hibernate_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.hibernate_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.hibernate_button.setShortcut("ctrl+p")
         self.hibernate_button.clicked.connect(self.hibernate)
 
@@ -117,7 +117,7 @@ class ShutdownMenu(QDialog):
         self.lock_button.setIconSize(QSize(self.icon_size, self.icon_size))
         self.lock_button.setToolTip("system-lock-screen")
         self.lock_button.setText("Lock-Screen")
-        self.lock_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;}")
+        self.lock_button.setStyleSheet("QToolButton {background-color:transparent;font-size: "+self.icon_font_size+"pt;font-weight: "+self.icon_font_weight+";border: none;color : white;}")
         self.lock_button.setShortcut("ctrl+p")
         self.lock_button.clicked.connect(self.lock)
 
