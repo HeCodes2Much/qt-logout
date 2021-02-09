@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # =====================================================
-#                  Author TheCynicalTeam
+#                  Author The-Repo-Club
 # =====================================================
 
 import sys
