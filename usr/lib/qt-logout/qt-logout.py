@@ -10,9 +10,9 @@ import os
 import shutil
 import subprocess
 import Functions as fn
-from PySide6.QtGui import *
-from PySide6.QtCore import *
-from PySide6.QtWidgets import *
+from PySide2.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtWidgets import *
 
 class ShutdownMenu(QDialog):
     # CANCEL - LOGOUT - SUSPEND - RESTART - SHUTDOWN- HIBERNATE- LOCK
