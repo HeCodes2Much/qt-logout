@@ -10,9 +10,9 @@ import os
 import shutil
 import subprocess
 import Functions as fn
-from PySide2.QtGui import *
-from PySide2.QtCore import *
-from PySide2.QtWidgets import *
+from PySide6.QtGui import *
+from PySide6.QtCore import *
+from PySide6.QtWidgets import *
 
 class ShutdownMenu(QDialog):
     # CANCEL - LOGOUT - SUSPEND - RESTART - SHUTDOWN- HIBERNATE- LOCK
@@ -297,7 +297,7 @@ if __name__ == '__main__':
         app = QApplication(sys.argv)
         Gui = ShutdownMenu()
         Gui.showFullScreen()
-        sys.exit(app.exec_())
+        sys.exit(app.exec())
     else:
         out = subprocess.run(["sh", "-c", "cat /proc/1/comm"], shell=False, stdout=subprocess.PIPE)
         system = out.stdout.decode().split("=")[0].strip()
