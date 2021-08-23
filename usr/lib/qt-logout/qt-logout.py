@@ -214,7 +214,7 @@ def logout_systemctl():
 
     print("Your desktop is " + desktop)
     if desktop in ("herbstluftwm", "/usr/share/xsessions/herbstluftwm"):
-        os.system( "herbstclient quit")
+        os.system("herbstclient quit")
     elif desktop in ("bspwm", "/usr/share/xsessions/bspwm"):
         os.system("pkill bspwm")
     elif desktop in ("jwm", "/usr/share/xsessions/jwm"):
@@ -229,8 +229,8 @@ def logout_systemctl():
         os.system("pkill xmonad")
     elif desktop in ("dwm", "/usr/share/xsessions/dwm"):
         os.system("pkill dwm")
-    elif desktop in ("instawm", "/usr/share/xsessions/instawm"):
-        os.system("pkill instawm")
+    elif desktop in ("repowm", "/usr/share/xsessions/repowm"):
+        os.system("pkill repowm")
     elif desktop in ("instantwm", "/usr/share/xsessions/instantwm"):
         os.system("pkill instantwm")
     elif desktop in ("i3", "/usr/share/xsessions/i3"):
@@ -245,6 +245,8 @@ def logout_systemctl():
         os.system("pkill xfce")
     elif desktop in ("sway", "/usr/bin/sway"):
         os.system("pkill sway")
+    else:
+        os.system("pkill " + desktop)
 
     return None
 
